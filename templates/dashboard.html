@@ -1,0 +1,271 @@
+{% extends "base.html" %}
+
+{% block title %}Home | Cybersecurity for Digital Heritage{% endblock %}
+
+{% block content %}
+<!-- Section A: Hero Area -->
+<section class="hero-section">
+    <div class="container hero-container">
+        <div class="hero-badge">Cybersecurity Graduation Research Project &bull; Phase 1</div>
+        <h1 class="hero-title">Digital Archaeological Archive</h1>
+        <h2 class="hero-subtitle">Preserving Digital Heritage. Protecting Historical Records.</h2>
+        <p class="hero-description">
+            A secure digital preservation platform designed to organize archaeological photographs, historical documents, 
+            and digital heritage collections while supporting file integrity verification and controlled access.
+        </p>
+        <div class="hero-actions">
+            <a href="{{ url_for('archive') }}" class="btn btn-primary">Explore Archive</a>
+            <a href="#about" class="btn btn-secondary">About the Project</a>
+        </div>
+    </div>
+</section>
+
+<!-- Section B: Statistics & Metrics Overview -->
+<section class="section-container container">
+    <div class="section-header">
+        <div class="section-title-wrapper">
+            <h3 class="section-heading">Platform Repository Scope</h3>
+            <span class="phase-tag">Sample Demonstration Data</span>
+        </div>
+        <p class="section-subtext">
+            Simulated demonstration metrics depicting planned archive scale. Real-time metric gathering 
+            will be activated alongside the database integration in Phase 2.
+        </p>
+    </div>
+
+    <div class="grid grid-4">
+        <div class="metric-card">
+            <span class="metric-label">Total Digital Records</span>
+            <div class="metric-value">1,480</div>
+            <span class="metric-sub">Cataloged repository assets</span>
+        </div>
+        <div class="metric-card">
+            <span class="metric-label">Archaeological Images</span>
+            <div class="metric-value">845</div>
+            <span class="metric-sub">Lossless field documentation</span>
+        </div>
+        <div class="metric-card">
+            <span class="metric-label">Historical Documents</span>
+            <div class="metric-value">412</div>
+            <span class="metric-sub">Manuscripts, logs, and sketches</span>
+        </div>
+        <div class="metric-card">
+            <span class="metric-label">Verified Files</span>
+            <div class="metric-value">100%</div>
+            <span class="metric-sub">Target cryptographic coverage</span>
+        </div>
+    </div>
+</section>
+
+<!-- Section C: Featured Collections -->
+<section class="section-container container">
+    <div class="section-header">
+        <h3 class="section-heading">Curated Archival Collections</h3>
+        <p class="section-subtext">
+            Taxonomy structure engineered to safeguard diverse categories of primary historical evidence.
+        </p>
+    </div>
+
+    <div class="grid grid-4">
+        <div class="card collection-card">
+            <div class="collection-icon">
+                <!-- Camera / Image Icon -->
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                    <circle cx="8.5" cy="8.5" r="1.5"/>
+                    <polyline points="21 15 16 10 5 21"/>
+                </svg>
+            </div>
+            <h4 class="card-title">Archaeological Photographs</h4>
+            <p class="card-text">
+                High-resolution field photography, stratigraphy cross-sections, and contextual artifact discovery captures.
+            </p>
+            <div class="card-footer-item">Format: TIFF, RAW, JPEG 2000</div>
+        </div>
+
+        <div class="card collection-card">
+            <div class="collection-icon">
+                <!-- Document Icon -->
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                    <polyline points="14 2 14 8 20 8"/>
+                    <line x1="16" y1="13" x2="8" y2="13"/>
+                    <line x1="16" y1="17" x2="8" y2="17"/>
+                </svg>
+            </div>
+            <h4 class="card-title">Historical Documents</h4>
+            <p class="card-text">
+                Scanned excavation journals, historic survey maps, architectural drafts, and researcher field notes.
+            </p>
+            <div class="card-footer-item">Format: PDF/A, High-Res Scans</div>
+        </div>
+
+        <div class="card collection-card">
+            <div class="collection-icon">
+                <!-- Layers / Excavation Icon -->
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+                    <polyline points="2 17 12 22 22 17"/>
+                    <polyline points="2 12 12 17 22 12"/>
+                </svg>
+            </div>
+            <h4 class="card-title">Excavation Records</h4>
+            <p class="card-text">
+                Trench logs, locus identification registries, structural measurements, and preliminary analysis notes.
+            </p>
+            <div class="card-footer-item">Format: Structured CSV, XML, PDF</div>
+        </div>
+
+        <div class="card collection-card">
+            <div class="collection-icon">
+                <!-- Cube / 3D Asset Icon -->
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                    <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+                    <line x1="12" y1="22.08" x2="12" y2="12"/>
+                </svg>
+            </div>
+            <h4 class="card-title">Digital Heritage Collections</h4>
+            <p class="card-text">
+                Photogrammetry meshes, 3D point clouds, reflectance transformation imaging (RTI), and interactive asset models.
+            </p>
+            <div class="card-footer-item">Format: OBJ, PLY, GLTF</div>
+        </div>
+    </div>
+</section>
+
+<!-- Section D: Cybersecurity Protection Architecture -->
+<section class="section-container container">
+    <div class="section-header">
+        <h3 class="section-heading">Cybersecurity Framework</h3>
+        <p class="section-subtext">
+            Security controls designed to protect digital heritage from illicit tampering, loss of provenance, and bit rot.
+        </p>
+    </div>
+
+    <div class="grid grid-2">
+        <div class="card security-card">
+            <div class="security-card-header">
+                <div class="security-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                    </svg>
+                </div>
+                <div>
+                    <h4 class="card-title">SHA-256 Cryptographic Integrity</h4>
+                    <span class="status-pill">Planned: Phase 2</span>
+                </div>
+            </div>
+            <p class="card-text">
+                Every newly deposited record will be digested through the SHA-256 cryptographic hashing algorithm 
+                upon intake. The resulting checksum establishes an unforgeable baseline to verify that files 
+                have not suffered accidental silent corruption (bit rot) or unauthorized malicious modification.
+            </p>
+        </div>
+
+        <div class="card security-card">
+            <div class="security-card-header">
+                <div class="security-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                        <circle cx="9" cy="7" r="4"/>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                    </svg>
+                </div>
+                <div>
+                    <h4 class="card-title">Role-Based Access Control (RBAC)</h4>
+                    <span class="status-pill">Planned: Phase 2</span>
+                </div>
+            </div>
+            <p class="card-text">
+                Strict compartmentalization of user privileges to enforce the Principle of Least Privilege. 
+                System roles (Public Researcher, Field Archaeologist, and System Administrator) dictate who may 
+                inspect records, deposit novel archaeological data, or manage system parameters.
+            </p>
+        </div>
+
+        <div class="card security-card">
+            <div class="security-card-header">
+                <div class="security-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                        <polyline points="17 8 12 3 7 8"/>
+                        <line x1="12" y1="3" x2="12" y2="15"/>
+                    </svg>
+                </div>
+                <div>
+                    <h4 class="card-title">Sanitized Secure Uploads</h4>
+                    <span class="status-pill">Planned: Phase 2</span>
+                </div>
+            </div>
+            <p class="card-text">
+                Defensive intake controls protecting server infrastructure against arbitrary file uploads, 
+                path traversal vulnerabilities, and embedded polyglot payloads. Includes filename canonicalization, 
+                strict MIME-type validation, and size enforcement routines.
+            </p>
+        </div>
+
+        <div class="card security-card">
+            <div class="security-card-header">
+                <div class="security-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="20" x2="18" y2="10"/>
+                        <line x1="12" y1="20" x2="12" y2="4"/>
+                        <line x1="6" y1="20" x2="6" y2="14"/>
+                    </svg>
+                </div>
+                <div>
+                    <h4 class="card-title">Immutable Activity Auditing</h4>
+                    <span class="status-pill">Planned: Phase 2</span>
+                </div>
+            </div>
+            <p class="card-text">
+                Time-stamped audit logs documenting all archive interactions, including catalog searches, 
+                verification routines, failed login sequences, and administrative configuration updates to 
+                guarantee institutional accountability.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Section E: Academic Context & Thesis Statement -->
+<section id="about" class="section-container container">
+    <div class="about-card">
+        <div class="about-grid">
+            <div>
+                <span class="hero-badge">Academic Context</span>
+                <h3 class="about-heading">Why Apply Cybersecurity to Cultural Heritage?</h3>
+                <p class="about-body">
+                    Archaeological documentation represents irreplaceable evidence of human history. When physical artifacts 
+                    undergo deterioration or destruction, secondary digital records—such as 3D photogrammetric models, 
+                    excavation journals, and uncompressed field imagery—become the primary historical source.
+                </p>
+                <p class="about-body">
+                    Standard commercial cloud storage solutions often overlook the specialized threats encountered by 
+                    archaeological repositories: silent bit drift, deliberate falsification of provenance records, 
+                    unauthorized asset duplication, and illicit antiquities trafficking intelligence leaks.
+                </p>
+            </div>
+            <div class="cia-framework-box">
+                <h4 class="cia-title">The CIA Triad in Digital Archaeology</h4>
+                <ul class="cia-list">
+                    <li>
+                        <strong>Confidentiality:</strong> Safeguarding unexcavated geospatial coordinates against 
+                        looting and unauthorized commercial exploitation.
+                    </li>
+                    <li>
+                        <strong>Integrity:</strong> Using cryptographic hashing (SHA-256) to ensure historical documents 
+                        and artifact logs remain strictly identical to their recorded state.
+                    </li>
+                    <li>
+                        <strong>Availability:</strong> Ensuring scholarly researchers maintain resilient, uninterrupted 
+                        access to vital heritage data across generational timeframes.
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

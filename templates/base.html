@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Digital Archaeological Archive{% endblock %} | Cybersecurity Project</title>
+    <!-- Main Application Stylesheet -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <!-- Primary Navigation Bar -->
+    <header class="navbar-wrapper">
+        <nav class="navbar container">
+            <a href="{{ url_for('home') }}" class="nav-brand">
+                <!-- Inline SVG Shield Icon for Security/Archaeology theme -->
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    <path d="M12 8v4"/>
+                    <path d="M12 16h.01"/>
+                </svg>
+                <div class="brand-text">
+                    <span class="brand-title">DAA Project</span>
+                    <span class="brand-sub">Archaeological Heritage Security</span>
+                </div>
+            </a>
+
+            <!-- Navigation Links -->
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="{{ url_for('home') }}" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url_for('archive') }}" class="nav-link">Digital Archive</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url_for('verify_placeholder') }}" class="nav-link">
+                        Integrity Verification
+                        <span class="tag-pill">Phase 2</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url_for('home') }}#about" class="nav-link">About Project</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url_for('login_placeholder') }}" class="btn btn-secondary nav-btn">
+                        Login
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- System Flash Messages / Notification Banners -->
+    <div class="container message-container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">
+                        <span class="alert-indicator">&#9432;</span>
+                        <span class="alert-body">{{ message }}</span>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+
+    <!-- Page Body Content Replacement Block -->
+    <main class="main-content">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Global Application Footer -->
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-col">
+                <h4 class="footer-title">Digital Archaeological Archive</h4>
+                <p class="footer-text">
+                    An academic cybersecurity graduation project engineered to research and implement cryptographic integrity 
+                    preservation, role-based governance, and threat mitigation for vulnerable cultural heritage records.
+                </p>
+            </div>
+            <div class="footer-col">
+                <h4 class="footer-title">Architecture Blueprint</h4>
+                <ul class="footer-links">
+                    <li><a href="{{ url_for('home') }}">Platform Overview</a></li>
+                    <li><a href="{{ url_for('archive') }}">Archival Metadata Demonstration</a></li>
+                    <li><a href="{{ url_for('verify_placeholder') }}">Cryptographic Verification (Planned)</a></li>
+                    <li><a href="{{ url_for('login_placeholder') }}">Access Control Gateway (Planned)</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4 class="footer-title">Academic Notice</h4>
+                <p class="footer-text">
+                    Cybersecurity Graduation Research Project. All metrics and integrity records presented in Phase 1 
+                    are simulated demonstration artifacts designed solely for layout evaluation.
+                </p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container footer-bottom-inner">
+                <p>&copy; 2026 Academic Graduation Project. Developed for Research Purposes.</p>
+                <p class="footer-badge">System Development Stage: Phase 1 (Interface Design)</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

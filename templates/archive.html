@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block title %}Digital Archive Catalog | Prototype View{% endblock %}
+
+{% block content %}
+<section class="archive-header-section">
+    <div class="container">
+        <div class="hero-badge">Archival Demonstration Catalog &bull; Phase 1 Interface</div>
+        <h1 class="page-title">Digital Heritage Preservation Repository</h1>
+        <p class="page-description">
+            This repository view demonstrates the planned metadata architecture, category classifications, and 
+            cryptographic fingerprint indexing for preserved archaeological records.
+        </p>
+
+        <!-- Demonstration Notice Banner -->
+        <div class="notice-box">
+            <strong>Phase 1 Interface Prototype:</strong> 
+            The records displayed below are simulated catalog entries used to evaluate the visual hierarchy, 
+            hash rendering, and responsive layout. Interactive file ingestion and verification pipelines will 
+            be connected in Phase 2.
+        </div>
+    </div>
+</section>
+
+<section class="section-container container">
+    <!-- Catalog Summary Filter Mockup -->
+    <div class="catalog-toolbar">
+        <div class="toolbar-title">
+            Preserved Records Overview 
+            <span class="count-badge">{{ records|length }} Sample Items</span>
+        </div>
+        <div class="toolbar-status">
+            Integrity Verification Status: 
+            <span class="status-indicator-idle">Idle (Phase 1 Mockup)</span>
+        </div>
+    </div>
+
+    <!-- Archival Records Table -->
+    <div class="table-responsive">
+        <table class="archive-table">
+            <thead>
+                <tr>
+                    <th>Record ID</th>
+                    <th>Asset Description</th>
+                    <th>Archival Category</th>
+                    <th>Document Date</th>
+                    <th>Digital Format</th>
+                    <th>Recorded SHA-256 Fingerprint</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for record in records %}
+                <tr>
+                    <td class="font-mono text-purple">{{ record.id }}</td>
+                    <td>
+                        <div class="record-title">{{ record.title }}</div>
+                        <span class="record-badge">{{ record.status }}</span>
+                    </td>
+                    <td>{{ record.category }}</td>
+                    <td>{{ record.date }}</td>
+                    <td><span class="format-pill">{{ record.format }}</span></td>
+                    <td>
+                        <div class="hash-container font-mono">
+                            <span class="hash-text" title="{{ record.hash_preview }}">{{ record.hash_preview }}</span>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+{% endblock %}
