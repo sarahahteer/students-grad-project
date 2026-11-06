@@ -1,106 +1,152 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ current_lang }}" dir="{{ current_dir }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Digital Archaeological Archive{% endblock %} | Cybersecurity Project</title>
-    <!-- Main Application Stylesheet -->
+    <title>{% block title %}{{ t('museum_name') }}{% endblock %} | {{ t('museum_sub') }}</title>
+    <!-- الخطوط المعتمدة: Cairo للعربية، Cinzel للمتاحف الأثرية، و JetBrains Mono للشفرات التشفيرية -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Cinzel:wght@600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- ورقة الأنماط بالهوية البصرية الجديدة -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
-<body>
+<body class="museum-body">
 
-    <!-- Primary Navigation Bar -->
-    <header class="navbar-wrapper">
+    <!-- الشريط الزخرفي الرافديني العلوي (نقش أسوار بابل ونينوى) -->
+    <div class="meso-top-frieze"></div>
+
+    <!-- ترويسة بهو المتحف الرقمي -->
+    <header class="museum-navbar-wrapper">
         <nav class="navbar container">
-            <a href="{{ url_for('home') }}" class="nav-brand">
-                <!-- Inline SVG Shield Icon for Security/Archaeology theme -->
-                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                    <path d="M12 8v4"/>
-                    <path d="M12 16h.01"/>
-                </svg>
+            <a href="{{ url_for('home') }}" class="museum-brand">
+                <!-- أيقونة الدرع الأثري مع ختم الثور المجنح الرافديني ونجمة عشتار -->
+                <div class="brand-crest">
+                    <svg viewBox="0 0 40 40" class="crest-svg" fill="none">
+                        <!-- قاعدة الحجر القديم -->
+                        <path d="M20 2L5 8V18C5 28 11.5 35.5 20 38C28.5 35.5 35 28 35 18V8L20 2Z" stroke="#C5A46D" stroke-width="2" fill="#292C27"/>
+                        <!-- نقش النجمة الرافدينية الثمانية المذهبة -->
+                        <path d="M20 9L22 16H29L23 20L25 27L20 23L15 27L17 20L11 16H18L20 9Z" fill="#A47B49"/>
+                        <!-- حلقة الأمان السيبراني الداعمة -->
+                        <circle cx="20" cy="20" r="14" stroke="#A47B49" stroke-width="1" stroke-dasharray="2 3"/>
+                        <circle cx="20" cy="20" r="3" fill="#C5A46D"/>
+                    </svg>
+                </div>
                 <div class="brand-text">
-                    <span class="brand-title">DAA Project</span>
-                    <span class="brand-sub">Archaeological Heritage Security</span>
+                    <span class="brand-title">{{ t('museum_name') }}</span>
+                    <span class="brand-subtitle">{{ t('museum_sub') }}</span>
                 </div>
             </a>
 
-            <!-- Navigation Links -->
+            <!-- روابط التنقل بين أجنحة المتحف -->
             <ul class="nav-menu">
                 <li class="nav-item">
-                    <a href="{{ url_for('home') }}" class="nav-link">Home</a>
+                    <a href="{{ url_for('home') }}" class="nav-link">{{ t('nav_home') }}</a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ url_for('archive') }}" class="nav-link">Digital Archive</a>
+                    <a href="{{ url_for('archive') }}" class="nav-link">{{ t('nav_archive') }}</a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ url_for('verify_placeholder') }}" class="nav-link">
-                        Integrity Verification
-                        <span class="tag-pill">Phase 2</span>
+                    <a href="{{ url_for('archive') }}#verify-section" class="nav-link">
+                        {{ t('nav_verify') }}
+                        <span class="nav-badge-gold">SHA-256</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ url_for('home') }}#about" class="nav-link">About Project</a>
+                    <a href="{{ url_for('home') }}#security-citadel" class="nav-link">{{ t('nav_security') }}</a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ url_for('login_placeholder') }}" class="btn btn-secondary nav-btn">
-                        Login
+                    <a href="{{ url_for('home') }}#thesis-section" class="nav-link">{{ t('nav_about') }}</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url_for('security_lab_portal') }}" class="nav-link">
+                       {% if current_lang == 'ar' %}المختبر الأمني{% else %}Security Lab{% endif %}
+                        <span class="nav-badge-gold">Lab</span>
+                    </a>
+                </li>
+                
+                <!-- زر التبديل بين اللغتين (عربي / إنجليزي) -->
+                <li class="nav-item">
+                    <a href="{{ url_for('set_language', lang=alt_lang) }}" class="museum-lang-toggle" title="Switch Language">
+                        <svg class="lang-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="2" y1="12" x2="22" y2="12"/>
+                            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                        </svg>
+                        <span>{{ t('lang_switch_label') }}</span>
+                    </a>
+                </li>
+
+                <!-- بوابة الدخول للباحثين والمشرفين -->
+                <li class="nav-item">
+                    <a href="{{ url_for('login_placeholder') }}" class="btn-ancient-bronze nav-btn">
+                        {{ t('nav_login') }}
                     </a>
                 </li>
             </ul>
         </nav>
     </header>
 
-    <!-- System Flash Messages / Notification Banners -->
-    <div class="container message-container">
+    <!-- الإشعارات والتحذيرات التشفيرية -->
+    <div class="container system-banner-container">
         {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
                 {% for category, message in messages %}
-                    <div class="alert alert-{{ category }}">
-                        <span class="alert-indicator">&#9432;</span>
-                        <span class="alert-body">{{ message }}</span>
+                    <div class="museum-alert alert-{{ category }}">
+                        <span class="alert-cuneiform-glyph">&#9670;</span>
+                        <span class="alert-content">{{ message }}</span>
                     </div>
                 {% endfor %}
             {% endif %}
         {% endwith %}
     </div>
 
-    <!-- Page Body Content Replacement Block -->
-    <main class="main-content">
+    <!-- مساحة المحتوى الرئيسي لكل صفحة -->
+    <main class="museum-main-viewport">
         {% block content %}{% endblock %}
     </main>
 
-    <!-- Global Application Footer -->
-    <footer class="footer">
-        <div class="container footer-content">
-            <div class="footer-col">
-                <h4 class="footer-title">Digital Archaeological Archive</h4>
-                <p class="footer-text">
-                    An academic cybersecurity graduation project engineered to research and implement cryptographic integrity 
-                    preservation, role-based governance, and threat mitigation for vulnerable cultural heritage records.
-                </p>
+    <!-- الفوتر الأثري الفخم -->
+    <footer class="museum-footer">
+        <div class="meso-footer-frieze"></div>
+        <div class="container footer-content-grid">
+            <div class="footer-column brand-col">
+                <div class="footer-brand-header">
+                    <span class="footer-crest-symbol">&#9881;</span>
+                    <h4 class="footer-heading">{{ t('museum_name') }}</h4>
+                </div>
+                <p class="footer-paragraph">{{ t('footer_desc') }}</p>
+                <div class="footer-system-pill">
+                    <span class="pulse-dot"></span>
+                    {{ t('footer_system_status') }}
+                </div>
             </div>
-            <div class="footer-col">
-                <h4 class="footer-title">Architecture Blueprint</h4>
-                <ul class="footer-links">
-                    <li><a href="{{ url_for('home') }}">Platform Overview</a></li>
-                    <li><a href="{{ url_for('archive') }}">Archival Metadata Demonstration</a></li>
-                    <li><a href="{{ url_for('verify_placeholder') }}">Cryptographic Verification (Planned)</a></li>
-                    <li><a href="{{ url_for('login_placeholder') }}">Access Control Gateway (Planned)</a></li>
+
+            <div class="footer-column">
+                <h4 class="footer-heading-sub">{{ t('footer_wings') }}</h4>
+                <ul class="footer-nav-list">
+                    <li><a href="{{ url_for('archive') }}">{{ t('footer_link_cuneiform') }}</a></li>
+                    <li><a href="{{ url_for('archive') }}">{{ t('footer_link_assyrian') }}</a></li>
+                    <li><a href="{{ url_for('archive') }}">{{ t('footer_link_excavations') }}</a></li>
+                    <li><a href="{{ url_for('home') }}#security-citadel">{{ t('footer_link_threats') }}</a></li>
                 </ul>
             </div>
-            <div class="footer-col">
-                <h4 class="footer-title">Academic Notice</h4>
-                <p class="footer-text">
-                    Cybersecurity Graduation Research Project. All metrics and integrity records presented in Phase 1 
-                    are simulated demonstration artifacts designed solely for layout evaluation.
-                </p>
+
+            <div class="footer-column">
+                <h4 class="footer-heading-sub">{{ t('footer_security_statement') }}</h4>
+                <p class="footer-paragraph">{{ t('footer_security_text') }}</p>
+                <div class="academic-seal">
+                    <div class="seal-inner">
+                        <span>ACADEMIC CYBERSECURITY PROJECT 2026</span>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="footer-bottom">
-            <div class="container footer-bottom-inner">
-                <p>&copy; 2026 Academic Graduation Project. Developed for Research Purposes.</p>
-                <p class="footer-badge">System Development Stage: Phase 1 (Interface Design)</p>
+
+        <div class="footer-bottom-bar">
+            <div class="container footer-bottom-flex">
+                <p class="copyright-text">{{ t('footer_copy') }}</p>
+                <span class="heritage-badge">{{ t('portal_badge') }}</span>
             </div>
         </div>
     </footer>

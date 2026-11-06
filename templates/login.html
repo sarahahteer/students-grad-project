@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="auth-card">
+    <h2 class="auth-title">{{ _t('login_title') }}</h2>
+    <p class="auth-subtitle">{{ _t('login_subtitle') }}</p>
+
+    <form method="POST" action="{{ url_for('login') }}">
+        <div class="form-group">
+            <label class="form-label">{{ _t('username') }}</label>
+            <input type="text" name="username" class="form-control" required autofocus autocomplete="off">
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">{{ _t('password') }}</label>
+            <input type="password" name="password" class="form-control" required>
+        </div>
+
+        <button type="submit" class="btn-primary">{{ _t('login_btn') }}</button>
+    </form>
+
+    <div style="text-align: center; margin-top: 1.5rem;">
+        <a href="{{ url_for('register') }}" style="color: var(--lavender-accent); font-size: 0.9rem; text-decoration: none;">
+            {{ _t('no_account') }}
+        </a>
+    </div>
+</div>
+{% endblock %}

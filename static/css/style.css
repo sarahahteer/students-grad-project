@@ -1,38 +1,64 @@
 /* ==========================================================================
-   Digital Archaeological Archive - Phase 1 Stylesheet
-   Academic Cybersecurity Graduation Project
-   Palette: Dark Charcoal (#0C1014), Secondary (#25292E), Purple (#4A256A),
-            Lavender Accents (#A855F7, #D8B4FE), Clean Off-White (#F5F5F5)
+   Ancient Heritage Digital Museum - Complete Visual Identity System
+   Cybersecurity for Digital Archaeological Collections
+   
+   Color Palette Standards:
+   - Main Background:      #171A19 (Dark Obsidian Slate)
+   - Secondary Background: #292C27 (Ancient Stone / Dark Olive-Charcoal)
+   - Antique Bronze:       #A47B49 (Noble Metallic Bronze)
+   - Ancient Gold:         #C5A46D (Weathered Babylonian Gold)
+   - Heritage Olive:       #6D7861 (Mesopotamian Palm-Olive Accent)
+   - Parchment:            #E9E1D2 (Aged Manuscript Ivory)
+   - Main Text:            #F4EBDD (Parchment Cream Off-White)
+   
+   Status Colors:
+   - Verified / Intact:    #388E3C (Emerald Stone Green)
+   - Compromised / Alert:  #D32F2F (Imperial Crimson Red)
+   - Warning / In Progress: #C5A46D (Ancient Gold)
    ========================================================================== */
 
-/* --- CSS Variables & Color Palette --- */
+/* --- تعريف المتغيرات التصميمية --- */
 :root {
-    --bg-main: #0C1014;
-    --bg-surface: #14181D;
-    --bg-card: #25292E;
-    --bg-card-hover: #2C3138;
-    
-    --accent-purple-deep: #4A256A;
-    --accent-purple-bright: #6B349A;
-    --accent-lavender: #C084FC;
-    --accent-lavender-dim: rgba(192, 132, 252, 0.15);
-    --accent-glow: rgba(107, 52, 154, 0.35);
+    --bg-main: #171A19;
+    --bg-secondary: #292C27;
+    --bg-card: #202422;
+    --bg-card-hover: #2B302C;
+    --bg-overlay: rgba(23, 26, 25, 0.88);
 
-    --text-primary: #F5F5F5;
-    --text-secondary: #B0B5BD;
-    --text-muted: #7E8590;
+    --bronze-antique: #A47B49;
+    --bronze-dark: #7A5730;
+    --gold-ancient: #C5A46D;
+    --gold-soft: rgba(197, 164, 109, 0.18);
+    --olive-heritage: #6D7861;
+    --parchment: #E9E1D2;
+    --text-primary: #F4EBDD;
+    --text-muted: #B5ACA0;
+    --text-stone: #8E9486;
 
-    --border-subtle: rgba(255, 255, 255, 0.08);
-    --border-focus: rgba(192, 132, 252, 0.4);
+    /* حالات الأمان */
+    --status-emerald: #43A047;
+    --status-emerald-dim: rgba(67, 160, 71, 0.16);
+    --status-crimson: #E53935;
+    --status-crimson-dim: rgba(229, 57, 53, 0.16);
+    --status-gold-dim: rgba(197, 164, 109, 0.16);
 
-    --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    --font-mono: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+    /* الحدود والظلال الفخمة */
+    --border-stone: rgba(197, 164, 109, 0.22);
+    --border-subtle: rgba(244, 235, 221, 0.08);
+    --border-bronze: rgba(164, 123, 73, 0.45);
+    --shadow-museum: 0 10px 30px rgba(0, 0, 0, 0.55);
+    --shadow-vitrine: 0 4px 20px rgba(0, 0, 0, 0.4);
 
-    --transition-standard: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-    --border-radius: 8px;
+    /* الخطوط */
+    --font-arabic: 'Cairo', -apple-system, BlinkMacSystemFont, "Segoe UI", Tahoma, sans-serif;
+    --font-display: 'Cinzel', 'Cairo', serif;
+    --font-mono: 'JetBrains Mono', Consolas, monospace;
+
+    --transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    --radius-stone: 6px;
 }
 
-/* --- Document Reset & Base Rules --- */
+/* --- الإعدادات الأولية وإعادة التعيين --- */
 *, *::before, *::after {
     box-sizing: border-box;
     margin: 0;
@@ -42,68 +68,115 @@
 html {
     scroll-behavior: smooth;
     font-size: 16px;
+    background-color: var(--bg-main);
 }
 
-body {
+body.museum-body {
     background-color: var(--bg-main);
     color: var(--text-primary);
-    font-family: var(--font-sans);
-    line-height: 1.6;
+    font-family: var(--font-arabic);
+    line-height: 1.7;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    overflow-x: hidden;
 }
 
-/* --- Layout Containers & Utilities --- */
+/* تفعيل الخط الإنجليزي المتخصص في حال التبديل للإنجليزية */
+html[lang="en"] body.museum-body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+html[lang="en"] .hero-museum-title,
+html[lang="en"] .brand-title,
+html[lang="en"] .section-title-museum {
+    font-family: var(--font-display);
+}
+
+/* --- أشرطة الزخارف الرافدينية العلوية والسفلية --- */
+.meso-top-frieze {
+    height: 4px;
+    background: repeating-linear-gradient(
+        90deg,
+        var(--bronze-antique) 0px,
+        var(--bronze-antique) 24px,
+        var(--gold-ancient) 24px,
+        var(--gold-ancient) 48px,
+        var(--olive-heritage) 48px,
+        var(--olive-heritage) 72px
+    );
+    border-bottom: 1px solid var(--border-stone);
+}
+
+.meso-footer-frieze {
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--bronze-antique), var(--gold-ancient), transparent);
+    margin-bottom: 2rem;
+}
+
+/* --- الحاويات والمرافق --- */
 .container {
     width: 100%;
-    max-width: 1200px;
+    max-width: 1220px;
     margin: 0 auto;
     padding: 0 1.5rem;
 }
 
-.main-content {
-    flex: 1 0 auto;
-}
-
 .font-mono {
     font-family: var(--font-mono);
+    direction: ltr;
+    display: inline-block;
 }
 
-.text-purple {
-    color: var(--accent-lavender);
-    font-weight: 600;
+.text-bronze-bold {
+    color: var(--gold-ancient);
+    font-weight: 700;
 }
 
-/* --- Navigation Bar --- */
-.navbar-wrapper {
-    background-color: rgba(12, 16, 20, 0.95);
-    border-bottom: 1px solid var(--border-subtle);
+.text-emerald {
+    color: var(--status-emerald) !important;
+}
+
+.text-emerald-dim {
+    color: #81C784 !important;
+}
+
+/* --- شريط الترويسة والتنقل (Museum Navigation) --- */
+.museum-navbar-wrapper {
+    background-color: rgba(23, 26, 25, 0.94);
+    border-bottom: 1px solid var(--border-stone);
     position: sticky;
     top: 0;
-    z-index: 100;
-    backdrop-filter: blur(8px);
+    z-index: 1000;
+    backdrop-filter: blur(10px);
 }
 
 .navbar {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1rem 1.5rem;
+    padding: 0.9rem 1.5rem;
 }
 
-.nav-brand {
+.museum-brand {
     display: flex;
     align-items: center;
+    gap: 0.9rem;
     text-decoration: none;
     color: var(--text-primary);
-    gap: 0.85rem;
 }
 
-.nav-icon {
-    width: 28px;
-    height: 28px;
-    stroke: var(--accent-lavender);
+.brand-crest {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.crest-svg {
+    width: 42px;
+    height: 42px;
 }
 
 .brand-text {
@@ -112,88 +185,127 @@ body {
 }
 
 .brand-title {
-    font-size: 1.15rem;
-    font-weight: 700;
+    font-size: 1.22rem;
+    font-weight: 800;
+    color: var(--parchment);
     letter-spacing: -0.01em;
 }
 
-.brand-sub {
+.brand-subtitle {
     font-size: 0.72rem;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+    color: var(--gold-ancient);
+    font-weight: 600;
 }
 
 .nav-menu {
     display: flex;
     align-items: center;
     list-style: none;
-    gap: 1.5rem;
+    gap: 1.25rem;
 }
 
 .nav-link {
-    color: var(--text-secondary);
+    color: var(--text-muted);
     text-decoration: none;
-    font-size: 0.92rem;
-    font-weight: 500;
+    font-size: 0.93rem;
+    font-weight: 600;
     display: flex;
     align-items: center;
     gap: 0.4rem;
-    transition: var(--transition-standard);
+    transition: var(--transition);
+    padding: 0.4rem 0.2rem;
+    position: relative;
 }
 
 .nav-link:hover {
-    color: var(--accent-lavender);
+    color: var(--gold-ancient);
 }
 
-.tag-pill {
+.nav-badge-gold {
     font-size: 0.65rem;
-    background-color: var(--accent-lavender-dim);
-    color: var(--accent-lavender);
-    padding: 0.15rem 0.45rem;
+    font-family: var(--font-mono);
+    background-color: var(--gold-soft);
+    color: var(--gold-ancient);
+    border: 1px solid var(--border-stone);
+    padding: 0.1rem 0.45rem;
     border-radius: 4px;
-    border: 1px solid rgba(192, 132, 252, 0.3);
-    font-weight: 600;
-    letter-spacing: 0.03em;
+    font-weight: 700;
 }
 
-/* --- Buttons --- */
-.btn {
+/* زر تبديل اللغة الأثري */
+.museum-lang-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.4rem 0.85rem;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-stone);
+    border-radius: var(--radius-stone);
+    color: var(--gold-ancient);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 700;
+    transition: var(--transition);
+}
+
+.museum-lang-toggle:hover {
+    background-color: var(--bronze-dark);
+    color: #FFFFFF;
+    border-color: var(--gold-ancient);
+    transform: translateY(-1px);
+}
+
+.lang-icon {
+    width: 15px;
+    height: 15px;
+}
+
+/* --- الأزرار الرسمية (Buttons) --- */
+.btn-ancient-bronze {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 0.65rem 1.35rem;
-    font-size: 0.92rem;
-    font-weight: 600;
-    border-radius: var(--border-radius);
+    gap: 0.5rem;
+    padding: 0.65rem 1.4rem;
+    font-size: 0.94rem;
+    font-weight: 700;
+    color: #FFFFFF;
+    background: linear-gradient(135deg, var(--bronze-antique), var(--bronze-dark));
+    border: 1px solid var(--gold-ancient);
+    border-radius: var(--radius-stone);
     text-decoration: none;
     cursor: pointer;
-    transition: var(--transition-standard);
-    border: 1px solid transparent;
+    box-shadow: 0 4px 14px rgba(164, 123, 73, 0.28);
+    transition: var(--transition);
 }
 
-.btn-primary {
-    background-color: var(--accent-purple-deep);
-    color: var(--text-primary);
-    box-shadow: 0 4px 14px var(--accent-glow);
+.btn-ancient-bronze:hover {
+    background: linear-gradient(135deg, #B58852, var(--bronze-antique));
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(164, 123, 73, 0.45);
 }
 
-.btn-primary:hover {
-    background-color: var(--accent-purple-bright);
-    box-shadow: 0 6px 20px rgba(107, 52, 154, 0.55);
-    transform: translateY(-1px);
+.btn-ancient-stone {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.65rem 1.4rem;
+    font-size: 0.94rem;
+    font-weight: 700;
+    color: var(--parchment);
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-stone);
+    border-radius: var(--radius-stone);
+    text-decoration: none;
+    cursor: pointer;
+    transition: var(--transition);
 }
 
-.btn-secondary {
-    background-color: var(--bg-card);
-    color: var(--text-primary);
-    border-color: var(--border-subtle);
-}
-
-.btn-secondary:hover {
-    background-color: var(--bg-card-hover);
-    border-color: var(--accent-lavender);
-    transform: translateY(-1px);
+.btn-ancient-stone:hover {
+    background-color: #353932;
+    border-color: var(--gold-ancient);
+    transform: translateY(-2px);
 }
 
 .nav-btn {
@@ -201,578 +313,798 @@ body {
     font-size: 0.85rem;
 }
 
-/* --- Flash Messages / Notifications --- */
-.message-container {
+.btn-icon {
+    width: 17px;
+    height: 17px;
+}
+
+/* --- التنبيهات والإشعارات (Alerts) --- */
+.system-banner-container {
     margin-top: 1.25rem;
 }
 
-.alert {
+.museum-alert {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-    padding: 0.85rem 1.25rem;
-    border-radius: var(--border-radius);
-    font-size: 0.92rem;
+    gap: 0.85rem;
+    padding: 0.9rem 1.25rem;
+    border-radius: var(--radius-stone);
+    font-size: 0.94rem;
     border: 1px solid transparent;
 }
 
-.alert-info {
-    background-color: rgba(74, 37, 106, 0.25);
-    border-color: var(--accent-purple-bright);
-    color: var(--text-primary);
+.alert-verified {
+    background-color: var(--status-emerald-dim);
+    border-color: var(--status-emerald);
+    color: #D4EDDA;
 }
 
-.alert-indicator {
-    color: var(--accent-lavender);
-    font-weight: 700;
+.alert-bronze {
+    background-color: var(--gold-soft);
+    border-color: var(--bronze-antique);
+    color: var(--parchment);
+}
+
+.alert-cuneiform-glyph {
+    color: var(--gold-ancient);
     font-size: 1.1rem;
 }
 
-/* --- Hero Section --- */
-.hero-section {
-    padding: 5rem 0 3.5rem 0;
+/* --- بهو المتحف الرئيسي (Hero Hall) --- */
+.museum-hero-hall {
+    padding: 5rem 0 4rem 0;
     text-align: center;
-    background: radial-gradient(circle at 50% 20%, rgba(74, 37, 106, 0.22) 0%, rgba(12, 16, 20, 0) 70%);
+    position: relative;
+    background: radial-gradient(circle at 50% 25%, rgba(164, 123, 73, 0.16) 0%, rgba(23, 26, 25, 0) 70%);
+    border-bottom: 1px solid var(--border-stone);
 }
 
-.hero-container {
-    max-width: 860px;
+.hero-content-wrapper {
+    max-width: 900px;
+    position: relative;
+    z-index: 2;
 }
 
-.hero-badge {
-    display: inline-block;
-    font-size: 0.75rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    padding: 0.35rem 0.85rem;
+.hero-parchment-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 0.35rem 0.95rem;
     border-radius: 50px;
-    background-color: var(--accent-lavender-dim);
-    color: var(--accent-lavender);
-    border: 1px solid rgba(192, 132, 252, 0.25);
+    background-color: var(--gold-soft);
+    color: var(--gold-ancient);
+    border: 1px solid var(--border-stone);
+    margin-bottom: 1.6rem;
+}
+
+.cuneiform-char {
+    font-size: 0.65rem;
+    color: var(--bronze-antique);
+}
+
+.hero-museum-title {
+    font-size: 3.1rem;
+    font-weight: 900;
+    line-height: 1.2;
+    color: var(--parchment);
+    margin-bottom: 0.8rem;
+}
+
+.hero-museum-subtitle {
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: var(--gold-ancient);
     margin-bottom: 1.5rem;
 }
 
-.hero-title {
-    font-size: 3rem;
-    font-weight: 800;
-    line-height: 1.15;
-    letter-spacing: -0.03em;
-    margin-bottom: 0.85rem;
-    color: #FFFFFF;
-}
-
-.hero-subtitle {
-    font-size: 1.25rem;
-    font-weight: 400;
-    color: var(--accent-lavender);
-    margin-bottom: 1.5rem;
-}
-
-.hero-description {
-    font-size: 1.05rem;
-    color: var(--text-secondary);
-    line-height: 1.7;
-    margin-bottom: 2.25rem;
-}
-
-.hero-actions {
+.hero-divider-ancient {
     display: flex;
+    align-items: center;
     justify-content: center;
     gap: 1rem;
+    margin: 1.2rem auto 1.8rem auto;
+    max-width: 320px;
+}
+
+.divider-line {
+    flex: 1;
+    height: 1px;
+    background-color: var(--border-stone);
+}
+
+.divider-rosette {
+    color: var(--bronze-antique);
+    font-size: 0.95rem;
+}
+
+.hero-museum-summary {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    line-height: 1.8;
+    margin-bottom: 2.5rem;
+}
+
+.hero-actions-group {
+    display: flex;
+    justify-content: center;
+    gap: 1.25rem;
     flex-wrap: wrap;
 }
 
-/* --- Section Formatting & Grids --- */
-.section-container {
-    padding: 3.5rem 1.5rem;
+/* --- أقسام المتحف والتخطيط الشبكي --- */
+.museum-section {
+    padding: 4rem 1.5rem;
 }
 
-.section-header {
-    margin-bottom: 2rem;
+.section-ancient-header {
+    margin-bottom: 2.25rem;
 }
 
-.section-title-wrapper {
+.header-seal-wrap {
     display: flex;
     align-items: center;
     gap: 0.85rem;
     flex-wrap: wrap;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.4rem;
 }
 
-.section-heading {
-    font-size: 1.75rem;
-    font-weight: 700;
-    letter-spacing: -0.01em;
+.section-title-museum {
+    font-size: 1.85rem;
+    font-weight: 800;
+    color: var(--parchment);
 }
 
-.section-subtext {
-    font-size: 0.95rem;
-    color: var(--text-secondary);
+.section-subtitle-museum {
+    font-size: 0.98rem;
+    color: var(--text-stone);
 }
 
-.phase-tag {
+.stone-badge-olive {
     font-size: 0.72rem;
-    color: var(--accent-lavender);
-    background-color: var(--accent-lavender-dim);
-    border: 1px solid rgba(192, 132, 252, 0.3);
-    padding: 0.15rem 0.6rem;
+    font-weight: 700;
+    color: var(--parchment);
+    background-color: var(--olive-heritage);
+    padding: 0.2rem 0.65rem;
     border-radius: 4px;
-    font-weight: 600;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.grid {
+.museum-grid {
     display: grid;
     gap: 1.5rem;
 }
 
-.grid-2 {
+.grid-2-columns {
     grid-template-columns: repeat(2, 1fr);
 }
 
-.grid-4 {
+.grid-4-columns {
     grid-template-columns: repeat(4, 1fr);
 }
 
-/* --- Cards & Dashboard Components --- */
-.card {
-    background-color: var(--bg-card);
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--border-radius);
-    padding: 1.65rem;
-    transition: var(--transition-standard);
+/* --- بطاقات الإحصائيات الأثرية (Ancient Stat Cards) --- */
+.ancient-stat-card {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-stone);
+    border-radius: var(--radius-stone);
+    padding: 1.6rem;
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow-vitrine);
+    transition: var(--transition);
 }
 
-.card:hover {
-    border-color: var(--border-focus);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+.ancient-stat-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--gold-ancient);
 }
 
-/* Metrics Cards */
-.metric-card {
-    background-color: var(--bg-surface);
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--border-radius);
-    padding: 1.5rem;
-    border-left: 3px solid var(--accent-purple-deep);
+.stat-card-accent {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--bronze-antique), var(--gold-ancient));
 }
 
-.metric-label {
-    font-size: 0.82rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    letter-spacing: 0.04em;
+.stat-card-label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text-stone);
     display: block;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.4rem;
 }
 
-.metric-value {
+.stat-card-number {
     font-size: 2.35rem;
     font-weight: 800;
-    color: #FFFFFF;
+    color: var(--parchment);
     line-height: 1.1;
     margin-bottom: 0.4rem;
 }
 
-.metric-sub {
-    font-size: 0.8rem;
-    color: var(--text-secondary);
+.stat-card-meta {
+    font-size: 0.78rem;
+    color: var(--text-muted);
 }
 
-/* Collection Cards */
-.collection-card {
+/* --- بطاقات أجنحة المجموعات المتحفية (Relic Cards) --- */
+.ancient-relic-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-stone);
+    border-radius: var(--radius-stone);
+    padding: 1.75rem;
     display: flex;
     flex-direction: column;
+    box-shadow: var(--shadow-vitrine);
+    transition: var(--transition);
 }
 
-.collection-icon {
-    width: 44px;
-    height: 44px;
-    border-radius: 6px;
-    background-color: var(--accent-lavender-dim);
+.ancient-relic-card:hover {
+    background-color: var(--bg-card-hover);
+    border-color: var(--gold-ancient);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-museum);
+}
+
+.relic-frame {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.3rem;
+}
+
+.relic-icon-wrapper {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-stone);
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-stone);
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 1.25rem;
 }
 
-.collection-icon svg {
-    width: 22px;
-    height: 22px;
-    stroke: var(--accent-lavender);
+.relic-icon-wrapper svg {
+    width: 24px;
+    height: 24px;
+    stroke: var(--gold-ancient);
 }
 
-.card-title {
-    font-size: 1.15rem;
-    font-weight: 700;
-    margin-bottom: 0.6rem;
-    color: #FFFFFF;
+.relic-status-pip {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
 }
 
-.card-text {
-    font-size: 0.9rem;
-    color: var(--text-secondary);
-    line-height: 1.6;
-    margin-bottom: 1.25rem;
+.relic-status-pip.verified {
+    background-color: var(--status-emerald);
+    box-shadow: 0 0 8px rgba(67, 160, 71, 0.6);
+}
+
+.relic-title {
+    font-size: 1.18rem;
+    font-weight: 800;
+    color: var(--parchment);
+    margin-bottom: 0.65rem;
+}
+
+.relic-description {
+    font-size: 0.92rem;
+    color: var(--text-muted);
+    line-height: 1.65;
+    margin-bottom: 1.3rem;
     flex-grow: 1;
 }
 
-.card-footer-item {
-    font-size: 0.75rem;
-    color: var(--accent-lavender);
+.relic-format-tag {
+    font-size: 0.76rem;
+    color: var(--gold-ancient);
     font-weight: 600;
     border-top: 1px solid var(--border-subtle);
-    padding-top: 0.75rem;
+    padding-top: 0.85rem;
 }
 
-/* Security Feature Cards */
-.security-card-header {
+/* --- قلعة الحماية السيبرانية (Cyber Citadel Cards) --- */
+.cyber-citadel-card {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-stone);
+    border-radius: var(--radius-stone);
+    padding: 1.85rem;
+    box-shadow: var(--shadow-vitrine);
+    transition: var(--transition);
+}
+
+.cyber-citadel-card:hover {
+    border-color: var(--gold-ancient);
+    transform: translateY(-2px);
+}
+
+.citadel-card-header {
     display: flex;
-    align-items: flex-start;
-    gap: 1rem;
-    margin-bottom: 1rem;
+    align-items: center;
+    gap: 1.1rem;
+    margin-bottom: 1.1rem;
 }
 
-.security-icon {
-    width: 40px;
-    height: 40px;
-    border-radius: 6px;
-    background-color: rgba(74, 37, 106, 0.4);
+.citadel-icon-gold {
+    width: 46px;
+    height: 46px;
+    border-radius: var(--radius-stone);
+    background: linear-gradient(135deg, var(--bg-card), var(--bg-main));
+    border: 1px solid var(--bronze-antique);
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
 }
 
-.security-icon svg {
-    width: 20px;
-    height: 20px;
-    stroke: var(--accent-lavender);
+.citadel-icon-gold svg {
+    width: 22px;
+    height: 22px;
+    stroke: var(--gold-ancient);
 }
 
-.status-pill {
+.citadel-card-title {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: var(--parchment);
+    margin-bottom: 0.2rem;
+}
+
+.citadel-badge-active {
     font-size: 0.68rem;
-    background-color: rgba(255, 255, 255, 0.05);
-    color: var(--text-secondary);
-    border: 1px solid var(--border-subtle);
+    font-family: var(--font-mono);
+    color: var(--gold-ancient);
+    background-color: var(--gold-soft);
+    border: 1px solid var(--border-stone);
     padding: 0.15rem 0.5rem;
     border-radius: 4px;
-    font-weight: 500;
-}
-
-/* Academic Context Section */
-.about-card {
-    background-color: var(--bg-surface);
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--border-radius);
-    padding: 2.5rem;
-}
-
-.about-grid {
-    display: grid;
-    grid-template-columns: 1.2fr 1fr;
-    gap: 2.5rem;
-    align-items: center;
-}
-
-.about-heading {
-    font-size: 1.6rem;
     font-weight: 700;
-    margin: 0.85rem 0 1rem 0;
-    color: #FFFFFF;
 }
 
-.about-body {
-    font-size: 0.95rem;
-    color: var(--text-secondary);
-    margin-bottom: 1rem;
+.citadel-card-text {
+    font-size: 0.94rem;
+    color: var(--text-muted);
     line-height: 1.7;
 }
 
-.cia-framework-box {
+/* --- قسم الأطروحة الأكاديمية (Ancient Thesis Section) --- */
+.ancient-thesis-enclosure {
     background-color: var(--bg-card);
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--border-radius);
-    padding: 1.75rem;
+    border: 1px solid var(--border-stone);
+    border-radius: var(--radius-stone);
+    padding: 2.85rem;
+    box-shadow: var(--shadow-museum);
 }
 
-.cia-title {
-    font-size: 1.05rem;
-    font-weight: 700;
-    color: var(--accent-lavender);
-    margin-bottom: 1rem;
-    border-bottom: 1px solid var(--border-subtle);
-    padding-bottom: 0.5rem;
+.thesis-grid-layout {
+    display: grid;
+    grid-template-columns: 1.25fr 1fr;
+    gap: 2.85rem;
+    align-items: center;
 }
 
-.cia-list {
+.thesis-heading {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: var(--parchment);
+    margin: 0.85rem 0 1rem 0;
+}
+
+.thesis-body-text {
+    font-size: 0.96rem;
+    color: var(--text-muted);
+    line-height: 1.8;
+    margin-bottom: 1.1rem;
+}
+
+.cia-citadel-box {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-stone);
+    border-radius: var(--radius-stone);
+    padding: 1.85rem;
+}
+
+.cia-citadel-title {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--gold-ancient);
+    margin-bottom: 1.25rem;
+    border-bottom: 1px solid var(--border-stone);
+    padding-bottom: 0.65rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.gold-rosette {
+    color: var(--bronze-antique);
+}
+
+.cia-triad-list {
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 0.85rem;
+    gap: 1.1rem;
 }
 
-.cia-list li {
-    font-size: 0.88rem;
-    color: var(--text-secondary);
-    line-height: 1.5;
+.cia-triad-item {
+    font-size: 0.91rem;
+    line-height: 1.6;
+    color: var(--text-muted);
 }
 
-.cia-list strong {
-    color: #FFFFFF;
+.cia-principle {
+    color: var(--parchment);
+    font-weight: 700;
+    display: block;
+    margin-bottom: 0.2rem;
 }
 
-/* --- Archive Catalog View --- */
-.archive-header-section {
-    padding: 3rem 0 1.5rem 0;
-    border-bottom: 1px solid var(--border-subtle);
-    background-color: var(--bg-surface);
+/* --- صفحة المعرض الأثري الفخمة (Archive Page) --- */
+.gallery-banner-hall {
+    padding: 3.5rem 0 2rem 0;
+    background-color: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-stone);
 }
 
-.page-title {
-    font-size: 2.25rem;
-    font-weight: 800;
-    margin-bottom: 0.6rem;
+.gallery-main-title {
+    font-size: 2.35rem;
+    font-weight: 900;
+    color: var(--parchment);
+    margin-bottom: 0.5rem;
 }
 
-.page-description {
-    font-size: 1rem;
-    color: var(--text-secondary);
-    max-width: 820px;
-    margin-bottom: 1.5rem;
+.gallery-main-desc {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    max-width: 860px;
+    margin-bottom: 1.6rem;
 }
 
-.notice-box {
-    background-color: rgba(74, 37, 106, 0.2);
-    border: 1px solid var(--accent-purple-deep);
-    border-left: 4px solid var(--accent-lavender);
-    padding: 0.9rem 1.25rem;
-    border-radius: var(--border-radius);
-    font-size: 0.88rem;
-    color: var(--text-primary);
+.ancient-notice-banner {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background-color: var(--gold-soft);
+    border: 1px solid var(--bronze-antique);
+    padding: 1rem 1.4rem;
+    border-radius: var(--radius-stone);
+    font-size: 0.93rem;
+    color: var(--parchment);
 }
 
-.catalog-toolbar {
+.notice-icon-bronze {
+    font-size: 1.35rem;
+    color: var(--gold-ancient);
+}
+
+.gallery-action-toolbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1.25rem;
+    margin-bottom: 1.4rem;
     flex-wrap: wrap;
     gap: 1rem;
 }
 
-.toolbar-title {
-    font-size: 1.1rem;
-    font-weight: 700;
+.toolbar-left {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: 0.85rem;
 }
 
-.count-badge {
-    font-size: 0.75rem;
-    background-color: var(--bg-card);
-    border: 1px solid var(--border-subtle);
-    padding: 0.2rem 0.5rem;
+.toolbar-caption {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--parchment);
+}
+
+.counter-badge-stone {
+    font-size: 0.76rem;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-stone);
+    padding: 0.2rem 0.6rem;
     border-radius: 4px;
-    color: var(--text-secondary);
+    color: var(--gold-ancient);
 }
 
-.toolbar-status {
-    font-size: 0.85rem;
+.toolbar-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.status-monitor-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.86rem;
     color: var(--text-muted);
 }
 
-.status-indicator-idle {
-    color: var(--accent-lavender);
-    font-weight: 600;
+.pulse-emerald {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--status-emerald);
+    box-shadow: 0 0 8px var(--status-emerald);
 }
 
-/* Repository Table */
-.table-responsive {
+/* جدول العرض المتحفي (Museum Table) */
+.museum-showcase-table-wrap {
     overflow-x: auto;
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--border-radius);
+    border: 1px solid var(--border-stone);
+    border-radius: var(--radius-stone);
     background-color: var(--bg-card);
+    box-shadow: var(--shadow-museum);
 }
 
-.archive-table {
+.museum-table {
     width: 100%;
     border-collapse: collapse;
+    text-align: right;
+    font-size: 0.91rem;
+}
+
+html[dir="ltr"] .museum-table {
     text-align: left;
-    font-size: 0.88rem;
 }
 
-.archive-table th {
-    background-color: var(--bg-surface);
-    color: var(--text-muted);
-    font-size: 0.75rem;
-    font-weight: 700;
+.museum-table th {
+    background-color: var(--bg-secondary);
+    color: var(--gold-ancient);
+    font-size: 0.82rem;
+    font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
-    padding: 1rem 1.25rem;
-    border-bottom: 1px solid var(--border-subtle);
+    padding: 1.1rem 1.35rem;
+    border-bottom: 1px solid var(--border-stone);
+    letter-spacing: 0.03em;
 }
 
-.archive-table td {
-    padding: 1rem 1.25rem;
+.museum-table td {
+    padding: 1.15rem 1.35rem;
     border-bottom: 1px solid var(--border-subtle);
-    color: var(--text-secondary);
+    color: var(--text-muted);
     vertical-align: middle;
 }
 
-.archive-table tbody tr:last-child td {
-    border-bottom: none;
-}
-
-.archive-table tbody tr:hover td {
+.museum-table tbody tr:hover td {
     background-color: var(--bg-card-hover);
 }
 
-.record-title {
-    font-weight: 600;
-    color: var(--text-primary);
+.relic-item-name {
+    font-weight: 700;
+    color: var(--parchment);
     margin-bottom: 0.2rem;
+    font-size: 0.96rem;
 }
 
-.record-badge {
-    font-size: 0.7rem;
-    color: var(--text-muted);
+.relic-item-cat {
+    font-size: 0.78rem;
+    color: var(--olive-heritage);
 }
 
-.format-pill {
+.epoch-tag {
+    font-size: 0.82rem;
+    color: var(--text-stone);
+    font-weight: 600;
+}
+
+.format-stone-badge {
     font-size: 0.75rem;
-    background-color: rgba(255, 255, 255, 0.05);
-    padding: 0.2rem 0.5rem;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-stone);
+    padding: 0.25rem 0.55rem;
     border-radius: 4px;
-    border: 1px solid var(--border-subtle);
-    color: var(--text-primary);
+    color: var(--parchment);
 }
 
-.hash-container {
+/* خزانة عرض بصمة SHA-256 */
+.hash-vitrine {
     max-width: 260px;
     background-color: var(--bg-main);
-    padding: 0.35rem 0.6rem;
+    padding: 0.4rem 0.7rem;
     border-radius: 4px;
-    border: 1px solid var(--border-subtle);
+    border: 1px solid var(--border-stone);
+    direction: ltr;
 }
 
-.hash-text {
+.hash-string {
     display: block;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    font-size: 0.78rem;
-    color: var(--accent-lavender);
+    font-size: 0.8rem;
+    color: var(--gold-ancient);
 }
 
-/* --- Footer --- */
-.footer {
-    background-color: var(--bg-surface);
-    border-top: 1px solid var(--border-subtle);
-    margin-top: 4rem;
+/* طابع السلامة التشفيرية (Stamp) */
+.status-stamp {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.25rem 0.7rem;
+    border-radius: 4px;
+    font-size: 0.78rem;
+    font-weight: 700;
+}
+
+.stamp-verified {
+    background-color: var(--status-emerald-dim);
+    border: 1px solid var(--status-emerald);
+    color: #81C784;
+}
+
+.stamp-icon {
+    width: 14px;
+    height: 14px;
+}
+
+/* --- الفوتر (Museum Footer) --- */
+.museum-footer {
+    background-color: var(--bg-secondary);
+    border-top: 1px solid var(--border-stone);
+    margin-top: 5rem;
     padding-top: 3.5rem;
 }
 
-.footer-content {
+.footer-content-grid {
     display: grid;
-    grid-template-columns: 2fr 1fr 1.5fr;
+    grid-template-columns: 2fr 1.2fr 1.5fr;
     gap: 3rem;
-    margin-bottom: 3rem;
+    margin-bottom: 3.5rem;
 }
 
-.footer-title {
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: #FFFFFF;
+.footer-brand-header {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
     margin-bottom: 1rem;
-    letter-spacing: 0.02em;
 }
 
-.footer-text {
-    font-size: 0.85rem;
+.footer-crest-symbol {
+    color: var(--gold-ancient);
+    font-size: 1.2rem;
+}
+
+.footer-heading {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: var(--parchment);
+}
+
+.footer-heading-sub {
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: var(--gold-ancient);
+    margin-bottom: 1.2rem;
+}
+
+.footer-paragraph {
+    font-size: 0.88rem;
     color: var(--text-muted);
-    line-height: 1.6;
+    line-height: 1.75;
+    margin-bottom: 1.25rem;
 }
 
-.footer-links {
+.footer-system-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.78rem;
+    color: var(--gold-ancient);
+    background-color: var(--bg-main);
+    border: 1px solid var(--border-stone);
+    padding: 0.35rem 0.8rem;
+    border-radius: 4px;
+}
+
+.pulse-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background-color: var(--status-emerald);
+    box-shadow: 0 0 6px var(--status-emerald);
+}
+
+.footer-nav-list {
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 0.6rem;
+    gap: 0.65rem;
 }
 
-.footer-links a {
-    color: var(--text-secondary);
+.footer-nav-list a {
+    color: var(--text-stone);
     text-decoration: none;
-    font-size: 0.85rem;
-    transition: var(--transition-standard);
+    font-size: 0.88rem;
+    transition: var(--transition);
 }
 
-.footer-links a:hover {
-    color: var(--accent-lavender);
+.footer-nav-list a:hover {
+    color: var(--gold-ancient);
+    padding-inline-start: 4px;
 }
 
-.footer-bottom {
+.academic-seal {
+    border: 1px dashed var(--bronze-antique);
+    padding: 0.8rem;
+    border-radius: var(--radius-stone);
+    text-align: center;
+    font-size: 0.75rem;
+    font-family: var(--font-mono);
+    color: var(--gold-ancient);
+}
+
+.footer-bottom-bar {
     border-top: 1px solid var(--border-subtle);
-    padding: 1.25rem 0;
-    font-size: 0.78rem;
-    color: var(--text-muted);
+    padding: 1.35rem 0;
+    background-color: var(--bg-main);
+    font-size: 0.82rem;
+    color: var(--text-stone);
 }
 
-.footer-bottom-inner {
+.footer-bottom-flex {
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    gap: 0.75rem;
+    gap: 1rem;
 }
 
-.footer-badge {
-    color: var(--accent-lavender);
+.heritage-badge {
+    color: var(--gold-ancient);
+    font-weight: 600;
 }
 
-/* --- Responsive Adjustments --- */
+/* --- استجابة الشاشات والأجهزة اللوحية والمحمولة (Responsive) --- */
 @media (max-width: 992px) {
-    .grid-4 {
+    .grid-4-columns {
         grid-template-columns: repeat(2, 1fr);
     }
-    .grid-2 {
+    .grid-2-columns {
         grid-template-columns: 1fr;
     }
-    .about-grid {
+    .thesis-grid-layout {
         grid-template-columns: 1fr;
     }
-    .footer-content {
+    .footer-content-grid {
         grid-template-columns: 1fr 1fr;
     }
 }
 
 @media (max-width: 768px) {
-    .hero-title {
-        font-size: 2.2rem;
+    .hero-museum-title {
+        font-size: 2.15rem;
     }
-    .hero-subtitle {
-        font-size: 1.1rem;
+    .hero-museum-subtitle {
+        font-size: 1.15rem;
     }
-    .grid-4 {
+    .grid-4-columns {
         grid-template-columns: 1fr;
     }
     .navbar {
         flex-direction: column;
-        gap: 1rem;
+        gap: 1.1rem;
     }
     .nav-menu {
         flex-wrap: wrap;
         justify-content: center;
         gap: 0.85rem;
     }
-    .footer-content {
+    .gallery-action-toolbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .footer-content-grid {
         grid-template-columns: 1fr;
     }
-    .footer-bottom-inner {
+    .footer-bottom-flex {
         flex-direction: column;
         align-items: flex-start;
     }

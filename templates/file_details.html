@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div style="margin-bottom: 1.5rem;">
+    <a href="{{ url_for('archive_view') }}" style="color: var(--lavender-accent); text-decoration: none;">&larr; العودة إلى الأرشيف</a>
+</div>
+
+<div style="display: grid; grid-template-columns: 2fr 1fr; gap: 2rem; align-items: start;">
+    <!-- بطاقة تفاصيل القطعة الأثرية -->
+    <div class="stat-card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+            <h2 style="color: var(--text-main);">{{ record.artifact_name }}</h2>
+            <span class="badge badge-purple">{{ record.record_id }}</span>
+        </div>
+
+        <p style="color: var(--text-muted); margin-bottom: 1.5rem;">{{ record.description or 'لا يوجد وصف مدون' }}</p>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
+            <div><strong>التصنيف:</strong> {{ record.category }}</div>
+            <div><strong>الحقبة التاريخية:</strong> {{ record.historical_period }}</div>
+            <div><strong>مكان الاكتشاف:</strong> {{ record.discovery_location }}</div>
+            <div><strong>المسؤول عن الرفع:</strong> {{ record.owner.full_name }} (@{{ record.owner.username }})</div>
+            <div><strong>تاريخ الرفع:</strong> {{ record.upload_date.strftime('%Y-%m-%d %H:%M UTC') }}</div>
+            <div><strong>حالة النشر:</strong> {{ 'عام مشترك' if record.is_public else 'سري وخاص' }}</div>
+        </div>
+
+        <!-- البصمة الرقمية الأصلية SHA-256 -->
+        <div style="background-color: #12161b; border: 1px solid var(--border-color); border-radius: 8px; padding: 1rem; margin-bottom: 1.5rem;">
+            <div style="color: var(--lavender-light); font-size: 0.85rem; margin-bottom: 0.3rem;">بصمة التجزئة الرقمية المشفرة (Genesis SHA-256 Hash):</div>
+            <code style="word-break: break-all; color: var(--success-color); font-size: 0.95rem;">{{ record.sha256_hash }}</code>
+        </div>
+
+        <!-- زر التنزيل الآمن -->
+        <div style="display: flex; gap: 1rem;">
+            <a href="{{ url_for('download_file', record_id=record.id) }}" class="btn-primary" style="text-align: center; text-decoration: none; flex: 1;">
+                ⬇ تنزيل الملف الآمن ({{ (record.file_size_bytes / 1024)|round(1) }} KB)
+            </a>
+
+            {% if current_user.id == record.user_id or current_user.is_admin() %}
+            <form method="POST" action="{{ url_for('delete_record', record_id=record.id) }}" onsubmit="return confirm('هل أنت متأكد من حذف هذا السجل نهائياً؟');">
+                <button type="submit" class="btn-primary" style="background-color: var(--danger-color); border-color: red; width: auto; padding: 12px 20px;">
+                    حذف السجل
+                </button>
+            </form>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- بطاقة فحص السلامة وتاريخ التغييرات (Chain of Custody) -->
+    <div class="stat-card">
+        <h3 style="color: var(--lavender-light); margin-bottom: 1rem;">🛡️ التحقق من السلامة</h3>
+        
+        <div style="text-align: center; padding: 1.5rem 0;">
+            {% if record.integrity_status == 'VERIFIED' %}
+                <div style="color: var(--success-color); font-size: 2.5rem;">🛡️</div>
+                <div style="color: var(--success-color); font-weight: 700; margin-top: 0.5rem;">الملف سليم ومحقق بنسبة 100%</div>
+                <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.3rem;">لم يتم التلاعب بأي بايت من الملف</p>
+            {% else %}
+                <div style="color: var(--danger-color); font-size: 2.5rem;">⚠️</div>
+                <div style="color: var(--danger-color); font-weight: 700; margin-top: 0.5rem;">تحذير: الملف متلاعب به أو مخترق!</div>
+                <p style="font-size: 0.8rem; color: var(--danger-color); margin-top: 0.3rem;">البصمة الحالية لا تطابق البصمة الأصلية</p>
+            {% endif %}
+        </div>
+
+        <form method="POST" action="{{ url_for('verify_record_integrity', record_id=record.id) }}">
+            <button type="submit" class="lang-btn" style="width: 100%; padding: 10px; margin-top: 0.5rem; text-align: center;">
+                🔄 إعادة فحص الـ SHA-256 الآن
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

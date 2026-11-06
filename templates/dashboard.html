@@ -1,172 +1,194 @@
 {% extends "base.html" %}
 
-{% block title %}Home | Cybersecurity for Digital Heritage{% endblock %}
+{% block title %}{{ t('nav_home') }} | {{ t('hero_title') }}{% endblock %}
 
 {% block content %}
-<!-- Section A: Hero Area -->
-<section class="hero-section">
-    <div class="container hero-container">
-        <div class="hero-badge">Cybersecurity Graduation Research Project &bull; Phase 1</div>
-        <h1 class="hero-title">Digital Archaeological Archive</h1>
-        <h2 class="hero-subtitle">Preserving Digital Heritage. Protecting Historical Records.</h2>
-        <p class="hero-description">
-            A secure digital preservation platform designed to organize archaeological photographs, historical documents, 
-            and digital heritage collections while supporting file integrity verification and controlled access.
-        </p>
-        <div class="hero-actions">
-            <a href="{{ url_for('archive') }}" class="btn btn-primary">Explore Archive</a>
-            <a href="#about" class="btn btn-secondary">About the Project</a>
+<!-- بهو الاستقبال: Hero Section مع تأثيرات القصر البابلي والزقورة -->
+<section class="museum-hero-hall">
+    <div class="hero-architectural-overlay"></div>
+    <div class="container hero-content-wrapper">
+        <div class="hero-parchment-badge">
+            <span class="cuneiform-char">&#9650;</span>
+            {{ t('hero_badge') }}
+            <span class="cuneiform-char">&#9650;</span>
+        </div>
+        
+        <h1 class="hero-museum-title">{{ t('hero_title') }}</h1>
+        <h2 class="hero-museum-subtitle">{{ t('hero_subtitle') }}</h2>
+        
+        <div class="hero-divider-ancient">
+            <span class="divider-line"></span>
+            <span class="divider-rosette">&#10040;</span>
+            <span class="divider-line"></span>
+        </div>
+
+        <p class="hero-museum-summary">{{ t('hero_desc') }}</p>
+        
+        <div class="hero-actions-group">
+            <a href="{{ url_for('archive') }}" class="btn-ancient-bronze hero-btn">
+                <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 21h18M3 7v14M21 7v14M6 7V3h12v4M10 11v6M14 11v6"/>
+                </svg>
+                {{ t('btn_explore_museum') }}
+            </a>
+            <a href="#security-citadel" class="btn-ancient-stone hero-btn">
+                <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                </svg>
+                {{ t('btn_security_protocol') }}
+            </a>
         </div>
     </div>
 </section>
 
-<!-- Section B: Statistics & Metrics Overview -->
-<section class="section-container container">
-    <div class="section-header">
-        <div class="section-title-wrapper">
-            <h3 class="section-heading">Platform Repository Scope</h3>
-            <span class="phase-tag">Sample Demonstration Data</span>
+<!-- سجل المستودع الأثري: الإحصائيات داخل بطاقات الحجر القديم والبرونز -->
+<section class="museum-section container">
+    <div class="section-ancient-header">
+        <div class="header-seal-wrap">
+            <h3 class="section-title-museum">{{ t('stats_heading') }}</h3>
+            <span class="stone-badge-olive">{{ t('stats_tag') }}</span>
         </div>
-        <p class="section-subtext">
-            Simulated demonstration metrics depicting planned archive scale. Real-time metric gathering 
-            will be activated alongside the database integration in Phase 2.
-        </p>
+        <p class="section-subtitle-museum">{{ t('stats_subtext') }}</p>
     </div>
 
-    <div class="grid grid-4">
-        <div class="metric-card">
-            <span class="metric-label">Total Digital Records</span>
-            <div class="metric-value">1,480</div>
-            <span class="metric-sub">Cataloged repository assets</span>
-        </div>
-        <div class="metric-card">
-            <span class="metric-label">Archaeological Images</span>
-            <div class="metric-value">845</div>
-            <span class="metric-sub">Lossless field documentation</span>
-        </div>
-        <div class="metric-card">
-            <span class="metric-label">Historical Documents</span>
-            <div class="metric-value">412</div>
-            <span class="metric-sub">Manuscripts, logs, and sketches</span>
-        </div>
-        <div class="metric-card">
-            <span class="metric-label">Verified Files</span>
-            <div class="metric-value">100%</div>
-            <span class="metric-sub">Target cryptographic coverage</span>
-        </div>
-    </div>
-</section>
-
-<!-- Section C: Featured Collections -->
-<section class="section-container container">
-    <div class="section-header">
-        <h3 class="section-heading">Curated Archival Collections</h3>
-        <p class="section-subtext">
-            Taxonomy structure engineered to safeguard diverse categories of primary historical evidence.
-        </p>
-    </div>
-
-    <div class="grid grid-4">
-        <div class="card collection-card">
-            <div class="collection-icon">
-                <!-- Camera / Image Icon -->
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-                    <circle cx="8.5" cy="8.5" r="1.5"/>
-                    <polyline points="21 15 16 10 5 21"/>
-                </svg>
-            </div>
-            <h4 class="card-title">Archaeological Photographs</h4>
-            <p class="card-text">
-                High-resolution field photography, stratigraphy cross-sections, and contextual artifact discovery captures.
-            </p>
-            <div class="card-footer-item">Format: TIFF, RAW, JPEG 2000</div>
+    <div class="museum-grid grid-4-columns">
+        <div class="ancient-stat-card">
+            <div class="stat-card-accent"></div>
+            <span class="stat-card-label">{{ t('stat_total_records') }}</span>
+            <div class="stat-card-number font-mono">1,480</div>
+            <span class="stat-card-meta">{{ t('stat_total_sub') }}</span>
         </div>
 
-        <div class="card collection-card">
-            <div class="collection-icon">
-                <!-- Document Icon -->
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                    <polyline points="14 2 14 8 20 8"/>
-                    <line x1="16" y1="13" x2="8" y2="13"/>
-                    <line x1="16" y1="17" x2="8" y2="17"/>
-                </svg>
-            </div>
-            <h4 class="card-title">Historical Documents</h4>
-            <p class="card-text">
-                Scanned excavation journals, historic survey maps, architectural drafts, and researcher field notes.
-            </p>
-            <div class="card-footer-item">Format: PDF/A, High-Res Scans</div>
+        <div class="ancient-stat-card">
+            <div class="stat-card-accent"></div>
+            <span class="stat-card-label">{{ t('stat_cuneiform') }}</span>
+            <div class="stat-card-number font-mono">845</div>
+            <span class="stat-card-meta">{{ t('stat_cuneiform_sub') }}</span>
         </div>
 
-        <div class="card collection-card">
-            <div class="collection-icon">
-                <!-- Layers / Excavation Icon -->
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <polygon points="12 2 2 7 12 12 22 7 12 2"/>
-                    <polyline points="2 17 12 22 22 17"/>
-                    <polyline points="2 12 12 17 22 12"/>
-                </svg>
-            </div>
-            <h4 class="card-title">Excavation Records</h4>
-            <p class="card-text">
-                Trench logs, locus identification registries, structural measurements, and preliminary analysis notes.
-            </p>
-            <div class="card-footer-item">Format: Structured CSV, XML, PDF</div>
+        <div class="ancient-stat-card">
+            <div class="stat-card-accent"></div>
+            <span class="stat-card-label">{{ t('stat_manuscripts') }}</span>
+            <div class="stat-card-number font-mono">412</div>
+            <span class="stat-card-meta">{{ t('stat_manuscripts_sub') }}</span>
         </div>
 
-        <div class="card collection-card">
-            <div class="collection-icon">
-                <!-- Cube / 3D Asset Icon -->
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
-                    <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
-                    <line x1="12" y1="22.08" x2="12" y2="12"/>
-                </svg>
-            </div>
-            <h4 class="card-title">Digital Heritage Collections</h4>
-            <p class="card-text">
-                Photogrammetry meshes, 3D point clouds, reflectance transformation imaging (RTI), and interactive asset models.
-            </p>
-            <div class="card-footer-item">Format: OBJ, PLY, GLTF</div>
+        <div class="ancient-stat-card stat-card-verified">
+            <div class="stat-card-accent"></div>
+            <span class="stat-card-label">{{ t('stat_integrity_rate') }}</span>
+            <div class="stat-card-number font-mono text-emerald">100%</div>
+            <span class="stat-card-meta text-emerald-dim">{{ t('stat_integrity_sub') }}</span>
         </div>
     </div>
 </section>
 
-<!-- Section D: Cybersecurity Protection Architecture -->
-<section class="section-container container">
-    <div class="section-header">
-        <h3 class="section-heading">Cybersecurity Framework</h3>
-        <p class="section-subtext">
-            Security controls designed to protect digital heritage from illicit tampering, loss of provenance, and bit rot.
-        </p>
+<!-- أجنحة المجموعات التاريخية (المعارض الأربعة) -->
+<section class="museum-section container">
+    <div class="section-ancient-header">
+        <h3 class="section-title-museum">{{ t('collections_heading') }}</h3>
+        <p class="section-subtitle-museum">{{ t('collections_subtext') }}</p>
     </div>
 
-    <div class="grid grid-2">
-        <div class="card security-card">
-            <div class="security-card-header">
-                <div class="security-icon">
+    <div class="museum-grid grid-4-columns">
+        <!-- جناح الألواح المسمارية -->
+        <div class="ancient-relic-card">
+            <div class="relic-frame">
+                <div class="relic-icon-wrapper">
+                    <!-- أيقونة اللوح المسماري الطيني -->
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                        <rect x="4" y="3" width="16" height="18" rx="2"/>
+                        <path d="M8 7h8M8 11h5M8 15h7M8 19h4"/>
+                    </svg>
+                </div>
+                <div class="relic-status-pip verified" title="Cryptographically Protected"></div>
+            </div>
+            <h4 class="relic-title">{{ t('wing_1_title') }}</h4>
+            <p class="relic-description">{{ t('wing_1_desc') }}</p>
+            <div class="relic-format-tag font-mono">{{ t('wing_1_format') }}</div>
+        </div>
+
+        <!-- جناح النقوش الآشورية -->
+        <div class="ancient-relic-card">
+            <div class="relic-frame">
+                <div class="relic-icon-wrapper">
+                    <!-- أيقونة النحت والمسلات الحجرية -->
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                        <polygon points="12 2 20 8.5 20 22 4 22 4 8.5 12 2"/>
+                        <line x1="12" y1="2" x2="12" y2="22"/>
+                        <line x1="4" y1="12" x2="20" y2="12"/>
+                    </svg>
+                </div>
+                <div class="relic-status-pip verified"></div>
+            </div>
+            <h4 class="relic-title">{{ t('wing_2_title') }}</h4>
+            <p class="relic-description">{{ t('wing_2_desc') }}</p>
+            <div class="relic-format-tag font-mono">{{ t('wing_2_format') }}</div>
+        </div>
+
+        <!-- جناح سجلات التنقيب -->
+        <div class="ancient-relic-card">
+            <div class="relic-frame">
+                <div class="relic-icon-wrapper">
+                    <!-- أيقونة المخطوط والخرائط القديمة -->
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                        <polyline points="14 2 14 8 20 8"/>
+                        <path d="M10 13l2 2 4-4"/>
+                    </svg>
+                </div>
+                <div class="relic-status-pip verified"></div>
+            </div>
+            <h4 class="relic-title">{{ t('wing_3_title') }}</h4>
+            <p class="relic-description">{{ t('wing_3_desc') }}</p>
+            <div class="relic-format-tag font-mono">{{ t('wing_3_format') }}</div>
+        </div>
+
+        <!-- جناح المسكوكات والذهب -->
+        <div class="ancient-relic-card">
+            <div class="relic-frame">
+                <div class="relic-icon-wrapper">
+                    <!-- أيقونة المسكوكات الذهبية واللقى -->
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                        <circle cx="12" cy="12" r="9"/>
+                        <path d="M12 7v10M9 9l6 6M15 9l-6 6"/>
+                    </svg>
+                </div>
+                <div class="relic-status-pip verified"></div>
+            </div>
+            <h4 class="relic-title">{{ t('wing_4_title') }}</h4>
+            <p class="relic-description">{{ t('wing_4_desc') }}</p>
+            <div class="relic-format-tag font-mono">{{ t('wing_4_format') }}</div>
+        </div>
+    </div>
+</section>
+
+<!-- قلعة الأمن السيبراني: محاور الحماية الأربعة -->
+<section id="security-citadel" class="museum-section container">
+    <div class="section-ancient-header">
+        <h3 class="section-title-museum">{{ t('security_heading') }}</h3>
+        <p class="section-subtitle-museum">{{ t('security_subtext') }}</p>
+    </div>
+
+    <div class="museum-grid grid-2-columns">
+        <div class="cyber-citadel-card">
+            <div class="citadel-card-header">
+                <div class="citadel-icon-gold">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
                         <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
                     </svg>
                 </div>
                 <div>
-                    <h4 class="card-title">SHA-256 Cryptographic Integrity</h4>
-                    <span class="status-pill">Planned: Phase 2</span>
+                    <h4 class="citadel-card-title">{{ t('sec_sha_title') }}</h4>
+                    <span class="citadel-badge-active">Cryptographic Seal</span>
                 </div>
             </div>
-            <p class="card-text">
-                Every newly deposited record will be digested through the SHA-256 cryptographic hashing algorithm 
-                upon intake. The resulting checksum establishes an unforgeable baseline to verify that files 
-                have not suffered accidental silent corruption (bit rot) or unauthorized malicious modification.
-            </p>
+            <p class="citadel-card-text">{{ t('sec_sha_desc') }}</p>
         </div>
 
-        <div class="card security-card">
-            <div class="security-card-header">
-                <div class="security-icon">
+        <div class="cyber-citadel-card">
+            <div class="citadel-card-header">
+                <div class="citadel-icon-gold">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
                         <circle cx="9" cy="7" r="4"/>
@@ -175,20 +197,16 @@
                     </svg>
                 </div>
                 <div>
-                    <h4 class="card-title">Role-Based Access Control (RBAC)</h4>
-                    <span class="status-pill">Planned: Phase 2</span>
+                    <h4 class="citadel-card-title">{{ t('sec_rbac_title') }}</h4>
+                    <span class="citadel-badge-active">Hierarchical Control</span>
                 </div>
             </div>
-            <p class="card-text">
-                Strict compartmentalization of user privileges to enforce the Principle of Least Privilege. 
-                System roles (Public Researcher, Field Archaeologist, and System Administrator) dictate who may 
-                inspect records, deposit novel archaeological data, or manage system parameters.
-            </p>
+            <p class="citadel-card-text">{{ t('sec_rbac_desc') }}</p>
         </div>
 
-        <div class="card security-card">
-            <div class="security-card-header">
-                <div class="security-icon">
+        <div class="cyber-citadel-card">
+            <div class="citadel-card-header">
+                <div class="citadel-icon-gold">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
                         <polyline points="17 8 12 3 7 8"/>
@@ -196,72 +214,60 @@
                     </svg>
                 </div>
                 <div>
-                    <h4 class="card-title">Sanitized Secure Uploads</h4>
-                    <span class="status-pill">Planned: Phase 2</span>
+                    <h4 class="citadel-card-title">{{ t('sec_vault_title') }}</h4>
+                    <span class="citadel-badge-active">Sanitized Intake</span>
                 </div>
             </div>
-            <p class="card-text">
-                Defensive intake controls protecting server infrastructure against arbitrary file uploads, 
-                path traversal vulnerabilities, and embedded polyglot payloads. Includes filename canonicalization, 
-                strict MIME-type validation, and size enforcement routines.
-            </p>
+            <p class="citadel-card-text">{{ t('sec_vault_desc') }}</p>
         </div>
 
-        <div class="card security-card">
-            <div class="security-card-header">
-                <div class="security-icon">
+        <div class="cyber-citadel-card">
+            <div class="citadel-card-header">
+                <div class="citadel-icon-gold">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <line x1="18" y1="20" x2="18" y2="10"/>
-                        <line x1="12" y1="20" x2="12" y2="4"/>
-                        <line x1="6" y1="20" x2="6" y2="14"/>
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                        <line x1="16" y1="13" x2="8" y2="13"/>
+                        <line x1="16" y1="17" x2="8" y2="17"/>
+                        <polyline points="10 9 9 9 8 9"/>
                     </svg>
                 </div>
                 <div>
-                    <h4 class="card-title">Immutable Activity Auditing</h4>
-                    <span class="status-pill">Planned: Phase 2</span>
+                    <h4 class="citadel-card-title">{{ t('sec_audit_title') }}</h4>
+                    <span class="citadel-badge-active">Forensic Logging</span>
                 </div>
             </div>
-            <p class="card-text">
-                Time-stamped audit logs documenting all archive interactions, including catalog searches, 
-                verification routines, failed login sequences, and administrative configuration updates to 
-                guarantee institutional accountability.
-            </p>
+            <p class="citadel-card-text">{{ t('sec_audit_desc') }}</p>
         </div>
     </div>
 </section>
 
-<!-- Section E: Academic Context & Thesis Statement -->
-<section id="about" class="section-container container">
-    <div class="about-card">
-        <div class="about-grid">
-            <div>
-                <span class="hero-badge">Academic Context</span>
-                <h3 class="about-heading">Why Apply Cybersecurity to Cultural Heritage?</h3>
-                <p class="about-body">
-                    Archaeological documentation represents irreplaceable evidence of human history. When physical artifacts 
-                    undergo deterioration or destruction, secondary digital records—such as 3D photogrammetric models, 
-                    excavation journals, and uncompressed field imagery—become the primary historical source.
-                </p>
-                <p class="about-body">
-                    Standard commercial cloud storage solutions often overlook the specialized threats encountered by 
-                    archaeological repositories: silent bit drift, deliberate falsification of provenance records, 
-                    unauthorized asset duplication, and illicit antiquities trafficking intelligence leaks.
-                </p>
+<!-- الأطروحة الأكاديمية ومثلث الحماية (CIA Triad) -->
+<section id="thesis-section" class="museum-section container">
+    <div class="ancient-thesis-enclosure">
+        <div class="thesis-grid-layout">
+            <div class="thesis-narrative">
+                <div class="hero-parchment-badge">{{ t('about_badge') }}</div>
+                <h3 class="thesis-heading">{{ t('about_heading') }}</h3>
+                <p class="thesis-body-text">{{ t('about_p1') }}</p>
+                <p class="thesis-body-text">{{ t('about_p2') }}</p>
             </div>
-            <div class="cia-framework-box">
-                <h4 class="cia-title">The CIA Triad in Digital Archaeology</h4>
-                <ul class="cia-list">
-                    <li>
-                        <strong>Confidentiality:</strong> Safeguarding unexcavated geospatial coordinates against 
-                        looting and unauthorized commercial exploitation.
+            <div class="cia-citadel-box">
+                <h4 class="cia-citadel-title">
+                    <span class="gold-rosette">&#10040;</span>
+                    {{ t('cia_title') }}
+                </h4>
+                <ul class="cia-triad-list">
+                    <li class="cia-triad-item">
+                        <strong class="cia-principle">{{ t('cia_conf_label') }}</strong>
+                        <span class="cia-explanation">{{ t('cia_conf_desc') }}</span>
                     </li>
-                    <li>
-                        <strong>Integrity:</strong> Using cryptographic hashing (SHA-256) to ensure historical documents 
-                        and artifact logs remain strictly identical to their recorded state.
+                    <li class="cia-triad-item">
+                        <strong class="cia-principle">{{ t('cia_integ_label') }}</strong>
+                        <span class="cia-explanation">{{ t('cia_integ_desc') }}</span>
                     </li>
-                    <li>
-                        <strong>Availability:</strong> Ensuring scholarly researchers maintain resilient, uninterrupted 
-                        access to vital heritage data across generational timeframes.
+                    <li class="cia-triad-item">
+                        <strong class="cia-principle">{{ t('cia_avail_label') }}</strong>
+                        <span class="cia-explanation">{{ t('cia_avail_desc') }}</span>
                     </li>
                 </ul>
             </div>

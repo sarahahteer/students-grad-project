@@ -1,68 +1,97 @@
 {% extends "base.html" %}
 
-{% block title %}Digital Archive Catalog | Prototype View{% endblock %}
+{% block title %}{{ t('nav_archive') }} | {{ t('museum_name') }}{% endblock %}
 
 {% block content %}
-<section class="archive-header-section">
+<!-- ترويسة المعرض الأثري -->
+<section class="gallery-banner-hall">
     <div class="container">
-        <div class="hero-badge">Archival Demonstration Catalog &bull; Phase 1 Interface</div>
-        <h1 class="page-title">Digital Heritage Preservation Repository</h1>
-        <p class="page-description">
-            This repository view demonstrates the planned metadata architecture, category classifications, and 
-            cryptographic fingerprint indexing for preserved archaeological records.
-        </p>
+        <div class="hero-parchment-badge">{{ t('archive_badge') }}</div>
+        <h1 class="gallery-main-title">{{ t('archive_title') }}</h1>
+        <p class="gallery-main-desc">{{ t('archive_desc') }}</p>
 
-        <!-- Demonstration Notice Banner -->
-        <div class="notice-box">
-            <strong>Phase 1 Interface Prototype:</strong> 
-            The records displayed below are simulated catalog entries used to evaluate the visual hierarchy, 
-            hash rendering, and responsive layout. Interactive file ingestion and verification pipelines will 
-            be connected in Phase 2.
+        <!-- صندوق التنبيه التشفيري المعتّق -->
+        <div class="ancient-notice-banner">
+            <div class="notice-icon-bronze">&#9878;</div>
+            <div>
+                <strong>{{ t('archive_notice_title') }}</strong>
+                <span>{{ t('archive_notice_text') }}</span>
+            </div>
         </div>
     </div>
 </section>
 
-<section class="section-container container">
-    <!-- Catalog Summary Filter Mockup -->
-    <div class="catalog-toolbar">
-        <div class="toolbar-title">
-            Preserved Records Overview 
-            <span class="count-badge">{{ records|length }} Sample Items</span>
+<!-- جدول مقتنيات المتحف وبصمات SHA-256 -->
+<section class="museum-section container" id="verify-section">
+    <div class="gallery-action-toolbar">
+        <div class="toolbar-left">
+            <h3 class="toolbar-caption">{{ t('table_heading') }}</h3>
+            <span class="counter-badge-stone font-mono">{{ records|length }} {{ t('stat_total_sub') }}</span>
         </div>
-        <div class="toolbar-status">
-            Integrity Verification Status: 
-            <span class="status-indicator-idle">Idle (Phase 1 Mockup)</span>
+        <div class="toolbar-right">
+            <span class="status-monitor-pill">
+                <span class="pulse-emerald"></span>
+                {{ t('table_status_label') }} <strong>{{ t('table_status_active') }}</strong>
+            </span>
+            <a href="{{ url_for('verify_placeholder') }}" class="btn-ancient-bronze">
+                <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="20 6 9 17 4 12"/>
+                </svg>
+                {{ t('btn_verify_item') }}
+            </a>
         </div>
     </div>
 
-    <!-- Archival Records Table -->
-    <div class="table-responsive">
-        <table class="archive-table">
+    <!-- جدول عرض المقتنيات بنمط خزائن العرض المتحفية الفخمة -->
+    <div class="museum-showcase-table-wrap">
+        <table class="museum-table">
             <thead>
                 <tr>
-                    <th>Record ID</th>
-                    <th>Asset Description</th>
-                    <th>Archival Category</th>
-                    <th>Document Date</th>
-                    <th>Digital Format</th>
-                    <th>Recorded SHA-256 Fingerprint</th>
+                    <th>{{ t('th_id') }}</th>
+                    <th>{{ t('th_desc') }}</th>
+                    <th>{{ t('th_period') }}</th>
+                    <th>{{ t('th_format') }}</th>
+                    <th>{{ t('th_hash') }}</th>
+                    <th>{{ t('th_status') }}</th>
                 </tr>
             </thead>
             <tbody>
-                {% for record in records %}
-                <tr>
-                    <td class="font-mono text-purple">{{ record.id }}</td>
+                {% for item in records %}
+                <tr class="museum-item-row">
+                    <!-- المعرف الأثري -->
+                    <td class="font-mono text-bronze-bold">{{ item.id }}</td>
+                    
+                    <!-- وصف القطعة وتفاصيل العرض -->
                     <td>
-                        <div class="record-title">{{ record.title }}</div>
-                        <span class="record-badge">{{ record.status }}</span>
+                        <div class="relic-item-name">{{ item.title }}</div>
+                        <span class="relic-item-cat">{{ item.category }}</span>
                     </td>
-                    <td>{{ record.category }}</td>
-                    <td>{{ record.date }}</td>
-                    <td><span class="format-pill">{{ record.format }}</span></td>
+
+                    <!-- العصر التاريخي للقطعة -->
                     <td>
-                        <div class="hash-container font-mono">
-                            <span class="hash-text" title="{{ record.hash_preview }}">{{ record.hash_preview }}</span>
+                        <span class="epoch-tag">{{ item.period }}</span>
+                    </td>
+
+                    <!-- الصيغة الرقمية للأصل -->
+                    <td>
+                        <span class="format-stone-badge font-mono">{{ item.format }}</span>
+                    </td>
+
+                    <!-- الحاوية المشفرة لبصمة SHA-256 -->
+                    <td>
+                        <div class="hash-vitrine font-mono">
+                            <span class="hash-string" title="{{ item.hash_preview }}">{{ item.hash_preview }}</span>
                         </div>
+                    </td>
+
+                    <!-- حالة السلامة التشفيرية الفورية -->
+                    <td>
+                        <span class="status-stamp stamp-verified">
+                            <svg class="stamp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                            {{ t('status_verified') }}
+                        </span>
                     </td>
                 </tr>
                 {% endfor %}

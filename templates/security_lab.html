@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block title %}المختبر الأمني التعليمي | Security Laboratory{% endblock %}
+
+{% block content %}
+<div class="container museum-section">
+    <div class="section-ancient-header">
+        <div class="header-seal-wrap">
+            <h2 class="section-title-museum">المختبر الأمني التطبيقي (Cybersecurity Sandbox Lab)</h2>
+            <span class="stone-badge-olive">Isolated Environment • Educational Only</span>
+        </div>
+        <p class="section-subtitle-museum">
+            مختبر دراسي معزول مخصص لمناقشة وتقييم ثغرات تطبيقات الويب الشائعة (OWASP Top 10) على الآثار الرقمية، يوضح الأكواد المصابة (Vulnerable) وطرق ترقيعها الآمنة (Patched).
+        </p>
+    </div>
+
+    <!-- صندوق تنبيه العزل الأمني -->
+    <div class="ancient-notice-banner" style="margin-bottom: 2.5rem;">
+        <div class="notice-icon-bronze">&#9888;</div>
+        <div>
+            <strong>بروتوكول الأمان الصارم:</strong>
+            <span>
+                هذا المختبر يعمل في بيئة محلية مستقلة تماماً ومفصولة عن قاعدة بيانات وسجلات الموقع الرئيسي، على خادم PHP مستقل عبر الرابط:
+                <code class="font-mono" style="color: var(--gold-ancient); background: var(--bg-main); padding: 0.2rem 0.5rem; border-radius: 4px;">{{ lab_url }}</code>
+            </span>
+        </div>
+    </div>
+
+    <div class="museum-grid grid-2-columns" style="gap: 2rem; margin-bottom: 3rem;">
+        
+        <!-- بطاقة تجارب PHP -->
+        <div class="ancient-relic-card" style="padding: 2rem;">
+            <div class="relic-frame">
+                <div class="relic-icon-wrapper">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 17l6-6-6-6M12 19h8"/>
+                    </svg>
+                </div>
+                <span class="citadel-badge-active">Backend Security</span>
+            </div>
+            <h3 class="relic-title">مختبر ثغرات الخادم (PHP Server Lab)</h3>
+            <p class="relic-description">
+                تطبيقات عملية على حقن قواعد البيانات (SQLi)، التلاعب بالمعرفات (IDOR)، ثغرات التزوير (CSRF)، واجتياز المسارات (Path Traversal) في سجلات القطع التاريخية.
+            </p>
+            <div style="margin-top: 1.5rem;">
+                <a href="{{ lab_url }}/index.php#php-section" target="_blank" rel="noopener noreferrer" class="btn-ancient-bronze" style="width: 100%;">
+                    فتح تجارب PHP في الخادم المعزول &rarr;
+                </a>
+            </div>
+        </div>
+
+        <!-- بطاقة تجارب JavaScript -->
+        <div class="ancient-relic-card" style="padding: 2rem;">
+            <div class="relic-frame">
+                <div class="relic-icon-wrapper">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+                        <polyline points="2 17 12 22 22 17"/>
+                        <polyline points="2 12 12 17 22 12"/>
+                    </svg>
+                </div>
+                <span class="citadel-badge-active">Client-Side Security</span>
+            </div>
+            <h3 class="relic-title">مختبر ثغرات المتصفح (JavaScript Lab)</h3>
+            <p class="relic-description">
+                محاكاة مباشرة لثغرات الـ DOM-based XSS، وتلويث النماذج الأولية (Prototype Pollution)، والتعامل غير الآمن مع التخزين المحلي (Local Storage) لبيانات الباحثين.
+            </p>
+            <div style="margin-top: 1.5rem;">
+                <a href="{{ lab_url }}/index.php#js-section" target="_blank" rel="noopener noreferrer" class="btn-ancient-stone" style="width: 100%;">
+                    فتح تجارب JavaScript في المتصفح &rarr;
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- بطاقة توجيه تشغيل خادم PHP المستقل -->
+    <div class="ancient-thesis-enclosure" style="padding: 2rem;">
+        <h4 style="color: var(--gold-ancient); font-weight: 800; margin-bottom: 0.8rem;">
+            كيفية تشغيل خادم المختبر المستقل (PowerShell):
+        </h4>
+        <p style="color: var(--text-muted); font-size: 0.92rem; margin-bottom: 1rem;">
+            في نافذة Terminal جديدة في VS Code، نفّذ الأمر التالي لتشغيل خادم المختبر المعزول على المنفذ 8000 دون إيقاف خادم Flask:
+        </p>
+        <pre class="font-mono" style="background: var(--bg-main); color: var(--gold-ancient); padding: 1rem; border-radius: 6px; border: 1px solid var(--border-stone); overflow-x: auto;">php -S 127.0.0.1:8000 -t security_lab</pre>
+    </div>
+</div>
+{% endblock %}
